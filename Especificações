@@ -1,0 +1,29 @@
+Lista de Tags para reconhecer:
+
+html
+head
+body
+title
+p
+br
+div
+h1, h2, h3, h4, h5 e h6
+span
+img
+
+
+Lista de CSS para reconhecimento:
+
+width
+height
+color
+font-size
+background
+border
+Atributos de Tag para reconhecer:
+
+id
+style
+src
+width
+height
