@@ -58,13 +58,13 @@ def GetAttributes(tag):
 def GetAttributeNames(attributes):
     return [attribute[0] for attribute in attributes]
 
-def GetAttributeNames(attributes):
+def GetAttributeValues(attributes):
     return [attribute[1] for attribute in attributes]
 
 
 input = '<html><head> <title> Compiladores </title> </head><body> <p style="color:red;background:blue;" id="abc"> Unipinhal </p> <br> </body></html>'
 
-tagStack = []
+tagStack = [] # lista de tags
 done = False
 index = -1
 
@@ -73,7 +73,7 @@ while True:
     index += 1
     
     #Verify if string ended
-    if index >= len(input):
+    if index >= len(input): # termina while
         break
 
     #Take a caracter
@@ -104,5 +104,5 @@ while True:
                 print(f"Atributo: {attribute_names[i]} Valor: {attribute_values[i]}")
     elif char != ' ':
         content = GetContent(input, index)
-        if content.strip() != '':
+        if content.strip() != '' and GetContent(input, index-2)[0:1] == '>' :
             print(f"Conteúdo: {content.strip()}, Nível {len(tagStack)}")
