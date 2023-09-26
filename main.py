@@ -88,7 +88,7 @@ while True:
                     for atrib in atributes:
                         atribName = GetAtributeName(atrib)
                         value = GetAtributeValue(atrib)
-                        print(f"Atributo: {atribName} Valor: {value}")
+                        print(f"Atributo: {atribName} Valor: {value}") 
     #If is just a caracter
     elif char != ' ':
         content = GetContent(input,index)
