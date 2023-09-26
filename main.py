@@ -84,7 +84,7 @@ while True:
                 tagStack.append(tag)
             while True:
                 atributes = GetAtributes(tag)
-                if len(atributes > 0):
+                if len(atributes) > 0:
                     for atrib in atributes:
                         atribName = GetAtributeName(atrib)
                         value = GetAtributeValue(atrib)
