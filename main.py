@@ -89,6 +89,9 @@ while True:
                         atribName = GetAtributeName(atrib)
                         value = GetAtributeValue(atrib)
                         print(f"Atributo: {atribName} Valor: {value}") 
+                        break
+                    else:
+                        break
     #If is just a caracter
     elif char != ' ':
         content = GetContent(input,index)
