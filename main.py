@@ -48,12 +48,28 @@ def IsSingleTag(tag):
     return False
 
 def GetAtributes(tag):
-    return 
+    atribs = re.findall(r'\s+[a-zA-Z0-9_]+="\s*[a-zA-Z0-9_;:]*"', tag)
+    if len(atribs) > 0 :
+        for atrib in atribs:
+            atrib.strip()
+        return atribs
+    return []
+
+def GetAtributeName(atrib):
+    name = re.search(r'[a-zA-Z0-9_]+=|$',atrib).group()
+    if name != None:
+        return name[0:len(name)-1]
+    return ''
+
+def GetAtributeValue(atrib):
+    value = re.search(r'="[a-zA-Z0-9_:;]+"|$',atrib).group()
+    if value != None:
+        return value[1:] 
+    return ''
 
 input = '<html><head> <title> Compiladores </title> </head><body> <p style="color:red;background:blue;" id="abc"> Unipinhal </p> <br> </body></html>'
 
 tagStack = []
-done = False
 index = -1
 
 while True:
@@ -80,18 +96,16 @@ while True:
             tag = GetTag(input,index)
             index += len(tag) - 1 
             print(f"Tag de abertura: {tag}, Nível {len(tagStack)}")
-            if not IsSingleTag(tag):
-                tagStack.append(tag)
-            while True:
-                atributes = GetAtributes(tag)
-                if len(atributes) > 0:
-                    for atrib in atributes:
-                        atribName = GetAtributeName(atrib)
-                        value = GetAtributeValue(atrib)
-                        print(f"Atributo: {atribName} Valor: {value}") 
-                        break
-                    else:
-                        break
+            if IsSingleTag(tag):
+                continue
+            #If not single tag just do what is needed    
+            tagStack.append(tag)
+            atributes = GetAtributes(tag)
+            if len(atributes) > 0:
+                for atrib in atributes:
+                    name = GetAtributeName(atrib)
+                    value = GetAtributeValue(atrib)
+                    print(f"Atributo: {name} Valor: {value}") 
     #If is just a caracter
     elif char != ' ':
         content = GetContent(input,index)
