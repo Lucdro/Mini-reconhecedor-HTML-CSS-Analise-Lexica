@@ -101,7 +101,16 @@ while True:
             attribute_names = GetAttributeNames(attributes)
             attribute_values = GetAttributeValues(attributes)
             for i in range(len(attribute_names)):
-                print(f"Atributo: {attribute_names[i]} Valor: {attribute_values[i]}")
+                
+                if attribute_names[i]=='style':
+                    attributes_style=  attribute_values[i].split(";")
+                    for j in range(len(attributes_style)):
+                        if attributes_style[j]!='':
+                            [attribute_style_name, attribute_style_value]= attributes_style[j].split(":")
+                            print(f"Atributo {j+1} do style: {attribute_style_name}, Valor {j+1} do style: {attribute_style_value}")
+                else:
+                    print(f"Atributo: {attribute_names[i]} Valor: {attribute_values[i]}")
+                        
     elif char != ' ':
         content = GetContent(input, index)
         if content.strip() != '' and GetContent(input, index-2)[0:1] == '>' :
