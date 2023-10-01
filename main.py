@@ -67,6 +67,15 @@ def GetAtributeValue(atrib):
         return value[1:] 
     return ''
 
+def GetStyles(atrib):
+    stylesre = re.findall(r'\s*[a-zA-Z0-9]+\s*:[a-zA-Z0-9]*;',atrib)
+    styles = []
+    if len(stylesre) == 0:
+        return styles
+    for stylere in stylesre:
+        styles.append(stylere.split(':'))
+    return styles
+
 input = '<html><head> <title> Compiladores </title> </head><body> <p style="color:red;background:blue;" id="abc"> Unipinhal </p> <br> </body></html>'
 
 tagStack = []
@@ -106,6 +115,11 @@ while True:
                     name = GetAtributeName(atrib)
                     value = GetAtributeValue(atrib)
                     print(f"Atributo: {name} Valor: {value}") 
+                    if name.strip().lower() == 'style':
+                        styles = GetStyles(value)
+                        if len(styles) > 0:
+                            for style in styles:
+                                print(f"Valor do atributo {style[0]} do style: {style[1]}")
     #If is just a caracter
     elif char != ' ':
         content = GetContent(input,index)
